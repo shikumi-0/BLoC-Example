@@ -11,9 +11,24 @@ part 'players_state.dart';
 
 class PlayersBloc extends Bloc<PlayersEvent, PlayersState> {
   final PlayerRepo playerRepo;
-  PlayersBloc({this.playerRepo})
-      : assert(playerRepo != null),
-        super(PlayersUninitialized());
+  PlayersBloc({this.playerRepo}) : super(PlayersUninitialized());
+
+  // @override
+  // Stream<PlayersState> transformEvents(Stream<PlayersEvent> events,
+  //     Stream<PlayersState> Function(PlayersEvent event) next) {
+  //   // TODO: implement transformEvents
+  //   return super.transformEvents(
+  //     (events as Observable<PlayersEvent>).debounce(
+  //         (_) => TimerStream(true, const Duration(milliseconds: 250))),
+  //     next,
+  //   );
+  // }
+
+  @override
+  void onTransition(Transition<PlayersEvent, PlayersState> transition) {
+    super.onTransition(transition);
+    print(transition);
+  }
 
   @override
   Stream<PlayersState> mapEventToState(
